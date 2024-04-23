@@ -14,6 +14,7 @@ import { Post } from "./posts/posts.model";
     controllers: [],
     providers: [],
     imports: [
+        
         SequelizeModule.forRoot({
           dialect: 'mongodb',
           host: 'zct.cluster-cps66m0cw888.eu-central-1.docdb.amazonaws.com', 
