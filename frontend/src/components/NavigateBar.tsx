@@ -6,7 +6,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 
 interface Props {
-    hideUserDropdown?: boolean; // Флаг для скрытия выпадающего списка пользователя
+    hideUserDropdown?: boolean; 
 }
 
 const NavigateBar: FC<Props> = ({ hideUserDropdown }) => {

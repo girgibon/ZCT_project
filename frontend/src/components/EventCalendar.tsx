@@ -13,6 +13,7 @@ const EventCalendar: FC<EventCalendarProps> = (props) => {
     function dateCellRender(value: Dayjs) {
         const formatedDate = formatDate(value.toDate());
         const currentDayEvents = props.events.filter(ev => ev.date === formatedDate);
+        // console.log(currentDayEvents)
         return (
             <div>
                 {currentDayEvents.map((ev, index) =>

@@ -20,7 +20,7 @@ export class Post extends Model<Post, PostCreationAttrs> {
     id: number;
 
     @ApiProperty({example: 'ZCT', description: "Title of task"})
-    @Column({type: DataType.STRING, unique: true, allowNull: false})
+    @Column({type: DataType.STRING, allowNull: false})
     title: string;
 
     @ApiProperty({example: 'Web application', description: "Task description"})

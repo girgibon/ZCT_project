@@ -5,7 +5,7 @@ import { IUser } from "../../../models/IUser";
 import { EventActionEnum, SetGuestsAction, SetEventsAction } from "./types";
 import UserService from "../../../api/UserService";
 import { responsiveArray } from "antd/es/_util/responsiveObserver";
-import { createEvent, getAllEvents } from "../../../http/userAPI";
+import { createEventDb, getAllEvents } from "../../../http/userAPI";
 import { getIdByEmail } from "../../../http/userAPI";
 
 export const EventActionCreators = {
@@ -22,9 +22,10 @@ export const EventActionCreators = {
     createEvent: (event: IEvent) =>  async (dispatch: AppDispatch) => {
         try {
             const userId = await getIdByEmail(event.author)
-            createEvent({title:event.title, description:event.description, date:event.date, userId:userId ?? 1})
-            const events = await getAllEvents() as IEvent[]
-            dispatch(EventActionCreators.setEvents(events));
+            const e = await createEventDb({title:event.title, description:event.description, date:event.date, userId:userId ? userId: 1})
+            const events = await getAllEvents()
+            const currentUserEvents = events.filter(ev => ev.user.email === event.author);
+            dispatch(EventActionCreators.setEvents(currentUserEvents));
         } catch (e) {
             console.log(e)
         }

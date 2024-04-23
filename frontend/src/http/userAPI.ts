@@ -25,7 +25,7 @@ interface RoleData {
 }
 
 interface UserResponse {
-    userId: number;
+    id: number;
     email: string;
 }
 
@@ -49,22 +49,27 @@ export const getAllEvents = async () => {
     return response.data; 
 };
 
-export const createEvent = async (data: EventData) => {
+export const createEventDb = async (data: EventData) => {
     const response = await $host.post<any>('posts', data);
     return response.data;
 };
 
-export const getIdByEmail = async (data: string) => {
+export const getIdByEmail = async (value: string) => {
     const response = await $host.get<UserResponse[]>('users');
     const users = response.data
-    const user = users.find((user) => user.email === data);
+    const user = users.find(user => user.email === value);
     if (user) {
-        return user.userId
+        return user.id
       }
       return undefined;
 };
 
-export const roles = async (data: RoleData) => {
+export const createRole = async (data: RoleData) => {
     const response = await $host.post<any>('roles', data);
     return response.data;
+}
+
+export const getRoleByValue = async (value: string) => {
+    const response = await $host.get<RoleData>('roles/'+value);
+    return response.data.value
 }

@@ -2,9 +2,8 @@ import { AuthActionEnum, SetAuthAction, SetErrorAction, SetUserAction, SetIsLoad
 import { jwtDecode } from "jwt-decode";
 import {IUser} from "../../../models/IUser";
 import { AppDispatch } from "../../index";
-import axios from "axios";
-import UserService from "../../../api/UserService";
-import { getAllEvents, getAllUsers, getIdByEmail, login, registration } from "../../../http/userAPI";
+import { getRoleByValue } from "../../../http/userAPI";
+import { login, registration, createRole } from "../../../http/userAPI";
 
 export const AuthActionCreators = {
     setIsAuth: (auth: boolean): SetAuthAction => ({type: AuthActionEnum.SET_AUTH, payload: auth}),
@@ -36,6 +35,13 @@ export const AuthActionCreators = {
         dispatch(AuthActionCreators.setIsAuth(false))
     },
     registration: (email: string, password: string) => async (dispatch: AppDispatch) => {
+        const admin = await getRoleByValue('ADMIN')
+        const user = await getRoleByValue("USER")
+        if (!admin) {
+            createRole({value:"ADMIN", description:"Admin"})
+            createRole({value:"USER", description:"User"}) 
+        }
+
         try {
             dispatch(AuthActionCreators.setIsLoading(true));
             const response = await registration({ email: email, password: password })

@@ -5,14 +5,11 @@ import { Layout } from "antd";
 import './App.css'
 import { useActions } from "./hooks/useActions";
 import { IUser } from "./models/IUser";
-import { roles } from "./http/userAPI";
 
 
 const App:FC = () => {
   const {setUser, setIsAuth} = useActions()
   useEffect(() => {
-    roles({value:"ADMIN", description:"Admin"})
-    roles({value:"USER", description:"User"})
     if (localStorage.getItem('auth')) {
       setUser({email: localStorage.getItem('email' || '')} as IUser)
       setIsAuth(true);

@@ -12,7 +12,6 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { Dayjs } from "dayjs";
 
 interface EventFormProps {
-    guests: IUser[]
     submit: (event: IEvent) => void
 }
 

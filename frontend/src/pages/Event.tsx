@@ -36,8 +36,7 @@ const Event:FC = () => {
         footer={null}
         onCancel={() => setModalOpen(false)}
       >
-        <EventForm
-          guests={guests} 
+        <EventForm 
           submit={addNewEvent}
         />
       </Modal>
