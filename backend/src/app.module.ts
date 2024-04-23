@@ -15,11 +15,11 @@ import { Post } from "./posts/posts.model";
     providers: [],
     imports: [
         SequelizeModule.forRoot({
-          dialect: 'postgres',
-          host: 'main.d3l34h9d5xjro4.amplifyapp.com',
-          port: 5432,   
-          username: 'postgres',
-          password: 'root',
+          dialect: 'mongodb',
+          host: 'zct.cluster-cps66m0cw888.eu-central-1.docdb.amazonaws.com', 
+          port: 27017, 
+          username: 'mongodb',
+          password: 'rootroot',
           database: 'zct',
           models: [User, Role, UserRoles, Post],
           autoLoadModels: true
