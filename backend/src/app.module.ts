@@ -14,9 +14,6 @@ import { Post } from "./posts/posts.model";
     controllers: [],
     providers: [],
     imports: [
-        ConfigModule.forRoot({
-            envFilePath: `.${process.env.NODE_ENV}.env`
-        }),
         SequelizeModule.forRoot({
           dialect: 'postgres',
           host: 'localhost',
