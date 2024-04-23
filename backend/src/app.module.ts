@@ -16,7 +16,7 @@ import { Post } from "./posts/posts.model";
     imports: [
         SequelizeModule.forRoot({
           dialect: 'postgres',
-          host: 'localhost',
+          host: 'main.d3l34h9d5xjro4.amplifyapp.com',
           port: 5432,   
           username: 'postgres',
           password: 'root',
