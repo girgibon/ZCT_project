@@ -1,12 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - zctnet
+name: Build and deploy Node.js app to Azure Web App - zctzct
 
 on:
   push:
     branches:
-      - main
+      - backend
   workflow_dispatch:
 
 jobs:
@@ -19,13 +19,13 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
 
       - name: npm install, build, and test
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
+          npm run start
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -39,18 +39,27 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: node-app
       
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_03FC9EB8EA21476EA1184F6A51EAE99E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C9219A389F8C4DE2AA6C5190C6F488A5 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8300B64F41024F2BB14D8B17493E6024 }}
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'zctnet'
+          app-name: 'zctzct'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_965237FD9D6C4E4CBD0D5B770E2C6695 }}
+          
