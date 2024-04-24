@@ -7,6 +7,7 @@ import { ValidationPipe } from "@nestjs/common"
 async function start() {
     const PORT = 5000
     const cors = require('cors')
+    const path = require('path')
     const app = await NestFactory.create(AppModule)
     app.use(cors())
 
@@ -20,7 +21,6 @@ async function start() {
     SwaggerModule.setup('/api/docs', app, document)
 
     app.useGlobalPipes(new ValidationPipe())
-    console.log(app)
     await app.listen(PORT, () => console.log(`Server started on port = ${PORT}`))
 }
 
