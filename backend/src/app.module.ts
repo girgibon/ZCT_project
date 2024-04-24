@@ -14,16 +14,16 @@ import { Post } from "./posts/posts.model";
     controllers: [],
     providers: [],
     imports: [
-        ConfigModule.forRoot({
-            envFilePath: `.${process.env.NODE_ENV}.env`
-        }),
+        
         SequelizeModule.forRoot({
+
           dialect: 'postgres',
           host: 'zct.postgres.database.azure.com',
           port: 5432,   
           username: 'postgres',
           password: 'Qwerty123',
           database: 'postgres',
+
           models: [User, Role, UserRoles, Post],
           autoLoadModels: true
         }),
