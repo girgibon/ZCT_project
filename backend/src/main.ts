@@ -5,7 +5,7 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard"
 import { ValidationPipe } from "@nestjs/common"
 
 async function start() {
-    const PORT = process.env.PORT || 5000
+    const PORT = 'https://main.d3l34h9d5xjro4.amplifyapp.com' || 5000
     const cors = require('cors')
     const app = await NestFactory.create(AppModule)
     app.use(cors())
