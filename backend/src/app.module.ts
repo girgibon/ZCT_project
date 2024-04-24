@@ -19,11 +19,11 @@ import { Post } from "./posts/posts.model";
         }),
         SequelizeModule.forRoot({
           dialect: 'postgres',
-          host: 'localhost',
+          host: 'zct.postgres.database.azure.com',
           port: 5432,   
           username: 'postgres',
-          password: 'root',
-          database: 'zct',
+          password: 'Qwerty123',
+          database: 'postgres',
           models: [User, Role, UserRoles, Post],
           autoLoadModels: true
         }),
