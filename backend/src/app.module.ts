@@ -14,23 +14,26 @@ import { Post } from "./posts/posts.model";
     controllers: [],
     providers: [],
     imports: [
-        
-        SequelizeModule.forRoot({
-
-          dialect: 'postgres',
-          host: 'zct.postgres.database.azure.com',
-          port: 5432,   
-          username: 'postgres',
-          password: 'Qwerty123',
-          database: 'postgres',
-
-          models: [User, Role, UserRoles, Post],
-          autoLoadModels: true
-        }),
-        UsersModule,
-        RolesModule,
-        AuthModule,
-        PostsModule,
+      SequelizeModule.forRoot({
+        dialect: 'postgres',
+        host: 'zct.postgres.database.azure.com',
+        port: 5432,
+        username: 'postgres',
+        password: 'Qwerty123',
+        database: 'postgres',
+        dialectOptions: {
+          ssl: {
+            require: true, // This will help you. But you will see nwe error
+            rejectUnauthorized: false // This line will fix new error
+          }
+        },
+        models: [User, Role, UserRoles, Post],
+        autoLoadModels: true
+      }),
+      UsersModule,
+      RolesModule,
+      AuthModule,
+      PostsModule,
       ],
 })
 export class AppModule {}
